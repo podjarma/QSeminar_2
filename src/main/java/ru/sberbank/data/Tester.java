@@ -1,22 +1,20 @@
 package ru.sberbank.data;
 
-import java.util.Objects;
-
-public class Developer {
-    Task currentTask;
+public class Tester {
     int id;
     boolean isFree;
+    Task currentTask;
     String firstName;
     String secondName;
 
-    public Developer(int id, String firstName, String secondName) {
+    public Tester(int id, String firstName, String secondName){
         this.id = id;
         this.isFree = true;
         this.firstName = firstName;
         this.secondName = secondName;
     }
 
-    public boolean equ(Developer d){
+    public boolean equ(Tester d){
         if(this.id == d.id){
             if(this.firstName.equalsIgnoreCase(d.firstName) && this.secondName.equalsIgnoreCase(d.secondName)) {
                 return true;
@@ -25,34 +23,33 @@ public class Developer {
         return false;
     }
 
-    public boolean addTask(Task task){
-        if(this.isFree && this.currentTask == null){
-            this.currentTask = task;
+    public boolean AddTask(Task t){
+        if (this.isFree == true && this.currentTask == null){
+            this.currentTask = t;
             this.isFree = false;
             return true;
         }
         return false;
     }
 
-    public Task makeTask(){
-        if(this.currentTask != null && this.isFree == false){
-            this.currentTask.isDeveloped = true;
-            this.isFree = true;
+    public Task CheckTask(){
+        if(this.currentTask != null && this.currentTask.isDeveloped == true){
+            this.currentTask.isTested = true;
         }
-        return null;
+        return this.currentTask;
     }
 
-    public void release(){
+    public void Release(){
         this.currentTask = null;
         this.isFree = true;
     }
 
     @Override
     public String toString() {
-        return "Developer{" +
-                "currentTask=" + currentTask +
-                ", id=" + id +
+        return "Tester{" +
+                "id=" + id +
                 ", isFree=" + isFree +
+                ", currentTask=" + currentTask +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 '}';
